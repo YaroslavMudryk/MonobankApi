@@ -7,6 +7,10 @@
     <RepositoryUrl>https://github.com/Yaroslav08/MonobankApi</RepositoryUrl>
     <RepositoryType>public</RepositoryType>
     <PackageId>Yaroslav08.MonobankApi</PackageId>
+    <FileVersion>1.1.0.0</FileVersion>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <Version>1.1.0</Version>
+    <PackageReleaseNotes>Fixed of logic with token per request</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
