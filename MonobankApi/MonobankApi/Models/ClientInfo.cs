@@ -12,6 +12,13 @@ namespace MonobankApi.Models
         public string WebHookUrl { get; set; }
         [JsonPropertyName("permissions")]
         public string Permissions { get; set; }
+        public string SendTo
+        {
+            get
+            {
+                return $"https://send.monobank.ua/{Id}";
+            }
+        }
         [JsonPropertyName("accounts")]
         public Account[] Accounts { get; set; }
     }
