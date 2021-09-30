@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Yaroslav08</Authors>
+    <RepositoryUrl>https://github.com/Yaroslav08/MonobankApi</RepositoryUrl>
+    <RepositoryType>public</RepositoryType>
+    <PackageId>Yaroslav08.MonobankApi</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
