@@ -10,6 +10,7 @@ namespace MonobankApi
     public class MonobankService : IMonobankService
     {
         private readonly HttpClient _httpClient;
+        private readonly string _token;
         public MonobankService(string token)
         {
             _httpClient = new HttpClient
@@ -18,6 +19,7 @@ namespace MonobankApi
                 Timeout = TimeSpan.FromMinutes(1)
             };
             _httpClient.DefaultRequestHeaders.Add(Constants.X_Token, token);
+            _token = token;
         }
 
         public async Task<ClientInfo> GetClientInfoAsync(string token = null)
@@ -25,6 +27,7 @@ namespace MonobankApi
             if (!string.IsNullOrEmpty(token))
                 _httpClient.DefaultRequestHeaders.Add(Constants.X_Token, token);
             var response = await _httpClient.GetAsync(Constants.Routes.Client_Info);
+            _httpClient.DefaultRequestHeaders.Add(Constants.X_Token, _token);
             if (response.IsSuccessStatusCode)
                 return JsonSerializer.Deserialize<ClientInfo>(await response.Content.ReadAsStringAsync());
             return null;
@@ -44,6 +47,7 @@ namespace MonobankApi
                 _httpClient.DefaultRequestHeaders.Add(Constants.X_Token, token);
             var url = string.Format(Constants.Routes.Transactions, accountId, from, to);
             var response = await _httpClient.GetAsync(url);
+            _httpClient.DefaultRequestHeaders.Add(Constants.X_Token, _token);
             if (response.IsSuccessStatusCode)
                 return JsonSerializer.Deserialize<List<Transaction>>(await response.Content.ReadAsStringAsync());
             return null;
