@@ -27,7 +27,7 @@ namespace MonobankApi
             if (!string.IsNullOrEmpty(token))
                 _httpClient.DefaultRequestHeaders.Add(Constants.X_Token, token);
             var response = await _httpClient.GetAsync(Constants.Routes.Client_Info);
-            _httpClient.DefaultRequestHeaders.Add(Constants.X_Token, _token);
+            RefreshToken();
             if (response.IsSuccessStatusCode)
                 return JsonSerializer.Deserialize<ClientInfo>(await response.Content.ReadAsStringAsync());
             return null;
@@ -47,7 +47,7 @@ namespace MonobankApi
                 _httpClient.DefaultRequestHeaders.Add(Constants.X_Token, token);
             var url = string.Format(Constants.Routes.Transactions, accountId, GetStringDate(from), GetStringDate(to));
             var response = await _httpClient.GetAsync(url);
-            _httpClient.DefaultRequestHeaders.Add(Constants.X_Token, _token);
+            RefreshToken();
             if (response.IsSuccessStatusCode)
                 return JsonSerializer.Deserialize<List<Transaction>>(await response.Content.ReadAsStringAsync());
             return null;
@@ -57,6 +57,12 @@ namespace MonobankApi
         {
             var dateOffset = new DateTimeOffset(dateTime);
             return dateOffset.ToUnixTimeSeconds().ToString();
+        }
+
+        private void RefreshToken()
+        {
+            _httpClient.DefaultRequestHeaders.Remove(Constants.X_Token);
+            _httpClient.DefaultRequestHeaders.Add(Constants.X_Token, _token);
         }
     }
 }
