@@ -7,10 +7,10 @@
     <RepositoryUrl>https://github.com/Yaroslav08/MonobankApi</RepositoryUrl>
     <RepositoryType>public</RepositoryType>
     <PackageId>Yaroslav08.MonobankApi</PackageId>
-    <FileVersion>1.2.0.0</FileVersion>
-    <AssemblyVersion>1.2.0.0</AssemblyVersion>
-    <Version>1.2.0</Version>
-    <PackageReleaseNotes>Changed type of params from string to DateTime in getting transactions</PackageReleaseNotes>
+    <FileVersion>1.2.1.0</FileVersion>
+    <AssemblyVersion>1.2.1.0</AssemblyVersion>
+    <Version>1.2.1</Version>
+    <PackageReleaseNotes>Fix bug with token set</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
