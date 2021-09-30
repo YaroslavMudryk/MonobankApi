@@ -7,10 +7,10 @@
     <RepositoryUrl>https://github.com/Yaroslav08/MonobankApi</RepositoryUrl>
     <RepositoryType>public</RepositoryType>
     <PackageId>Yaroslav08.MonobankApi</PackageId>
-    <FileVersion>1.2.2.0</FileVersion>
-    <AssemblyVersion>1.2.2.0</AssemblyVersion>
-    <Version>1.2.2</Version>
-    <PackageReleaseNotes>Added field SendTo in ClientInfo model</PackageReleaseNotes>
+    <FileVersion>1.2.3.0</FileVersion>
+    <AssemblyVersion>1.2.3.0</AssemblyVersion>
+    <Version>1.2.3</Version>
+    <PackageReleaseNotes>Added handler for error</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
