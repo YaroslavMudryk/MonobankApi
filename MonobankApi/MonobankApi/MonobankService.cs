@@ -30,7 +30,8 @@ namespace MonobankApi
             RefreshToken();
             if (response.IsSuccessStatusCode)
                 return JsonSerializer.Deserialize<ClientInfo>(await response.Content.ReadAsStringAsync());
-            return null;
+            var error = JsonSerializer.Deserialize<ErrorResponse>(await response.Content.ReadAsStringAsync());
+            throw new HttpRequestException(error.ErrorDescription);
         }
 
         public async Task<List<Currency>> GetCurrenciesAsync()
@@ -38,7 +39,8 @@ namespace MonobankApi
             var response = await _httpClient.GetAsync(Constants.Routes.Currency_Rate);
             if (response.IsSuccessStatusCode)
                 return JsonSerializer.Deserialize<List<Currency>>(await response.Content.ReadAsStringAsync());
-            return null;
+            var error = JsonSerializer.Deserialize<ErrorResponse>(await response.Content.ReadAsStringAsync());
+            throw new HttpRequestException(error.ErrorDescription);
         }
 
         public async Task<List<Transaction>> GetTransactionsAsync(string accountId, DateTime from, DateTime to, string token = null)
@@ -50,7 +52,8 @@ namespace MonobankApi
             RefreshToken();
             if (response.IsSuccessStatusCode)
                 return JsonSerializer.Deserialize<List<Transaction>>(await response.Content.ReadAsStringAsync());
-            return null;
+            var error = JsonSerializer.Deserialize<ErrorResponse>(await response.Content.ReadAsStringAsync());
+            throw new HttpRequestException(error.ErrorDescription);
         }
 
         private string GetStringDate(DateTime dateTime)
