@@ -41,16 +41,22 @@ namespace MonobankApi
             return null;
         }
 
-        public async Task<List<Transaction>> GetTransactionsAsync(string accountId, string from, string to = null, string token = null)
+        public async Task<List<Transaction>> GetTransactionsAsync(string accountId, DateTime from, DateTime to, string token = null)
         {
             if (!string.IsNullOrEmpty(token))
                 _httpClient.DefaultRequestHeaders.Add(Constants.X_Token, token);
-            var url = string.Format(Constants.Routes.Transactions, accountId, from, to);
+            var url = string.Format(Constants.Routes.Transactions, accountId, GetStringDate(from), GetStringDate(to));
             var response = await _httpClient.GetAsync(url);
             _httpClient.DefaultRequestHeaders.Add(Constants.X_Token, _token);
             if (response.IsSuccessStatusCode)
                 return JsonSerializer.Deserialize<List<Transaction>>(await response.Content.ReadAsStringAsync());
             return null;
+        }
+
+        private string GetStringDate(DateTime dateTime)
+        {
+            var dateOffset = new DateTimeOffset(dateTime);
+            return dateOffset.ToUnixTimeSeconds().ToString();
         }
     }
 }
